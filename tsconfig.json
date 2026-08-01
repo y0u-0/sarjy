@@ -1,0 +1,3 @@
+{
+	"extends": "@sarjy-sql/config/tsconfig.base.json"
+}

@@ -1,0 +1,89 @@
+import { db } from "@sarjy-sql/db";
+import { attempt as attemptTable } from "@sarjy-sql/db/schema/practice";
+import { exerciseProgress } from "@sarjy-sql/db/schema/progress";
+import { and, desc, eq, sql } from "drizzle-orm";
+
+import { protectedProcedure } from "../index";
+import { OPTIMIZATION_EXERCISE_CONCEPT } from "../lib/assessment-catalog";
+import { recordGradedAttempt } from "../lib/learner-memory";
+import { DISCARD_ATTEMPT_MS } from "../lib/mastery";
+import { ATTEMPT_INPUT } from "./practice";
+
+export const recordOptimizationAttempt = protectedProcedure
+	.input(ATTEMPT_INPUT)
+	.handler(async ({ context, input }) => {
+		const concept = OPTIMIZATION_EXERCISE_CONCEPT.get(input.exerciseId);
+		if (!concept || concept !== input.concept) {
+			return { recorded: false as const, state: "invalid-exercise" as const };
+		}
+		if (input.elapsedMs < DISCARD_ATTEMPT_MS) {
+			return { recorded: false as const, state: "too-fast" as const };
+		}
+		const userId = context.session.user.id;
+		const kind = input.passed ? null : (input.kind ?? "wrong-values");
+		const ordinal = await db.transaction(async (tx) => {
+			const [previous] = await tx
+				.select({ ordinal: attemptTable.ordinal })
+				.from(attemptTable)
+				.where(
+					and(
+						eq(attemptTable.userId, userId),
+						eq(attemptTable.exerciseId, input.exerciseId),
+					),
+				)
+				.orderBy(desc(attemptTable.ordinal))
+				.limit(1);
+			const nextOrdinal = (previous?.ordinal ?? 0) + 1;
+			const now = new Date();
+			await tx.insert(attemptTable).values({
+				userId,
+				exerciseId: input.exerciseId,
+				concept,
+				sql: input.sql,
+				passed: input.passed,
+				kind,
+				elapsedMs: input.elapsedMs,
+				ordinal: nextOrdinal,
+				predicted: input.predicted,
+				hintShown: input.hintShown,
+				gaveUp: input.gaveUp,
+			});
+			await tx
+				.insert(exerciseProgress)
+				.values({
+					userId,
+					exerciseId: input.exerciseId,
+					attempts: 1,
+					lastSql: input.sql,
+					completedAt: input.passed ? now : null,
+				})
+				.onConflictDoUpdate({
+					target: [exerciseProgress.userId, exerciseProgress.exerciseId],
+					set: {
+						attempts: sql`${exerciseProgress.attempts} + 1`,
+						lastSql: input.sql,
+						updatedAt: now,
+						...(input.passed ? { completedAt: now } : {}),
+					},
+				});
+			return nextOrdinal;
+		});
+		try {
+			await recordGradedAttempt({
+				userId,
+				concept,
+				kind,
+				sql: input.sql,
+				elapsedMs: input.elapsedMs,
+				ordinal,
+				hintShown: input.hintShown,
+				gaveUp: input.gaveUp,
+			});
+		} catch (error) {
+			console.error(
+				"[progress] optimization learner cache update failed",
+				error,
+			);
+		}
+		return { recorded: true as const, state: "recorded" as const, ordinal };
+	});

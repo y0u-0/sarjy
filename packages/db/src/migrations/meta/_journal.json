@@ -1,0 +1,48 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1781276667887,
+      "tag": "0000_cultured_living_lightning",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1785443384086,
+      "tag": "0001_plain_drax",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1785514743328,
+      "tag": "0002_sudden_phil_sheldon",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1785528243798,
+      "tag": "0003_bright_catseye",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1785548137734,
+      "tag": "0004_serious_wallflower",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1785604071371,
+      "tag": "0005_overjoyed_celestials",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+	"name": "@sarjy-sql/auth",
+	"type": "module",
+	"exports": {
+		".": {
+			"default": "./src/index.ts"
+		},
+		"./*": {
+			"default": "./src/*.ts"
+		}
+	},
+	"scripts": {
+		"check-types": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@sarjy-sql/db": "workspace:*",
+		"@sarjy-sql/env": "workspace:*",
+		"better-auth": "catalog:",
+		"dotenv": "catalog:",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@sarjy-sql/config": "workspace:*",
+		"typescript": "catalog:"
+	}
+}

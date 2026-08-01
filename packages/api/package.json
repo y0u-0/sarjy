@@ -1,0 +1,34 @@
+{
+	"name": "@sarjy-sql/api",
+	"type": "module",
+	"exports": {
+		".": {
+			"default": "./src/index.ts"
+		},
+		"./*": {
+			"default": "./src/*.ts"
+		}
+	},
+	"scripts": {
+		"check-types": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@orpc/client": "catalog:",
+		"@orpc/openapi": "catalog:",
+		"@orpc/server": "catalog:",
+		"@orpc/zod": "catalog:",
+		"@sarjy-sql/auth": "workspace:*",
+		"@sarjy-sql/db": "workspace:*",
+		"@sarjy-sql/env": "workspace:*",
+		"@qdrant/js-client-rest": "^1.18.0",
+		"dotenv": "catalog:",
+		"drizzle-orm": "^0.45.1",
+		"mem0ai": "^3.1.2",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@sarjy-sql/config": "workspace:*",
+		"@types/bun": "catalog:",
+		"typescript": "catalog:"
+	}
+}

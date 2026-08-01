@@ -1,0 +1,758 @@
+@import "@fontsource-variable/archivo";
+@import "@fontsource-variable/jetbrains-mono";
+@import "@sarjy-sql/ui/globals.css";
+
+@keyframes marquee {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-50%);
+	}
+}
+
+@keyframes rise-in {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes stamp-in {
+	from {
+		opacity: 0;
+		transform: scale(0.97);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@utility animate-marquee {
+	animation: marquee 30s linear infinite;
+}
+
+@utility animate-rise {
+	animation: rise-in 0.5s var(--ease-snap) both;
+}
+
+@utility animate-stamp {
+	animation: stamp-in 0.3s var(--ease-snap) both;
+}
+
+@utility tile-tag {
+	clip-path: polygon(0 0, 72% 0, 100% 50%, 72% 100%, 0 100%);
+}
+
+@keyframes caret-blink {
+	0%,
+	49% {
+		opacity: 1;
+	}
+	50%,
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes scanline {
+	0% {
+		transform: translateY(-4px);
+		opacity: 0;
+	}
+	12% {
+		opacity: 1;
+	}
+	88% {
+		opacity: 1;
+	}
+	100% {
+		transform: translateY(76px);
+		opacity: 0;
+	}
+}
+
+@keyframes eq-bar {
+	0%,
+	100% {
+		height: 8px;
+	}
+	50% {
+		height: 30px;
+	}
+}
+
+@keyframes select-sweep {
+	0%,
+	12% {
+		clip-path: inset(0 100% 0 0);
+	}
+	38%,
+	78% {
+		clip-path: inset(0 0 0 0);
+	}
+	92%,
+	100% {
+		clip-path: inset(0 100% 0 0);
+	}
+}
+
+@keyframes chip-pop {
+	0%,
+	40% {
+		opacity: 0;
+		transform: scale(0.9) rotate(-2deg);
+	}
+	48%,
+	82% {
+		opacity: 1;
+		transform: scale(1) rotate(-2deg);
+	}
+	90%,
+	100% {
+		opacity: 0;
+		transform: scale(0.9) rotate(-2deg);
+	}
+}
+
+@keyframes row-shimmer {
+	0%,
+	100% {
+		opacity: 0.45;
+	}
+	50% {
+		opacity: 1;
+	}
+}
+
+@utility animate-caret {
+	animation: caret-blink 1.1s steps(1) infinite;
+}
+
+@utility animate-scanline {
+	animation: scanline 3.2s var(--ease-snap) infinite;
+}
+
+@utility animate-eq-bar {
+	animation: eq-bar 0.9s ease-in-out infinite;
+}
+
+@utility animate-select-sweep {
+	animation: select-sweep 4.5s var(--ease-snap) infinite;
+}
+
+@utility animate-chip-pop {
+	animation: chip-pop 4.5s var(--ease-snap) infinite;
+}
+
+@utility animate-row-shimmer {
+	animation: row-shimmer 2.4s ease-in-out infinite;
+}
+
+@keyframes result-land {
+	0%,
+	12% {
+		opacity: 0;
+		transform: translateX(-8px);
+	}
+	24%,
+	82% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	100% {
+		opacity: 0.55;
+		transform: translateX(0);
+	}
+}
+
+@keyframes profile-fill {
+	from {
+		transform: scaleX(0.08);
+	}
+	to {
+		transform: scaleX(1);
+	}
+}
+
+@keyframes ghost-hint-in {
+	0%,
+	12% {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+	25%,
+	82% {
+		opacity: 0.72;
+		transform: translateY(0);
+	}
+	100% {
+		opacity: 0.35;
+		transform: translateY(0);
+	}
+}
+
+@keyframes scan-cell-read {
+	0%,
+	18% {
+		opacity: 0.18;
+		transform: scale(0.82);
+	}
+	34%,
+	86% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	100% {
+		opacity: 0.45;
+		transform: scale(1);
+	}
+}
+
+@keyframes landing-title-in {
+	from {
+		transform: translateY(115%) rotate(1.5deg);
+	}
+	to {
+		transform: translateY(0) rotate(0);
+	}
+}
+
+@keyframes landing-underline-in {
+	from {
+		transform: scaleX(0) rotate(-1deg);
+	}
+	to {
+		transform: scaleX(1) rotate(-1deg);
+	}
+}
+
+@keyframes landing-hero-card-in {
+	from {
+		opacity: 0;
+		transform: translate3d(28px, 22px, 0) scale(0.97) rotate(1deg);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) scale(1) rotate(0);
+	}
+}
+
+@keyframes landing-observation-in {
+	from {
+		opacity: 0;
+		transform: translateX(10px) scale(0.98);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0) scale(1);
+	}
+}
+
+@keyframes landing-teaching-move-in {
+	from {
+		opacity: 0;
+		transform: translateY(10px) scale(0.985);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+@keyframes landing-orb-presence {
+	0%,
+	100% {
+		transform: translateY(0) rotate(-1deg);
+	}
+	50% {
+		transform: translateY(-3px) rotate(1deg);
+	}
+}
+
+@keyframes landing-orb-copy-in {
+	from {
+		opacity: 0;
+		transform: translateY(5px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes landing-orb-wave {
+	0%,
+	100% {
+		transform: scaleY(0.3);
+	}
+	50% {
+		transform: scaleY(1);
+	}
+}
+
+@keyframes landing-presence-pulse {
+	0% {
+		opacity: 0.55;
+		transform: scale(1);
+	}
+	70%,
+	100% {
+		opacity: 0;
+		transform: scale(2.8);
+	}
+}
+
+@keyframes landing-loop-signal-in {
+	from {
+		opacity: 0;
+		transform: translateX(-10px) scale(0.985);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0) scale(1);
+	}
+}
+
+@keyframes landing-meter-in {
+	from {
+		transform: scaleX(0.08);
+	}
+	to {
+		transform: scaleX(1);
+	}
+}
+
+@keyframes landing-model-ring {
+	0%,
+	100% {
+		opacity: 0.35;
+		transform: scale(0.9);
+	}
+	50% {
+		opacity: 0.8;
+		transform: scale(1.08);
+	}
+}
+
+@keyframes landing-adjusted-in {
+	from {
+		opacity: 0;
+		transform: scale(0.92) rotate(-2deg);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1) rotate(0);
+	}
+}
+
+@keyframes landing-arrow-pulse {
+	0%,
+	100% {
+		opacity: 0.35;
+	}
+	45% {
+		opacity: 1;
+	}
+}
+
+@keyframes landing-scroll-progress {
+	from {
+		transform: scaleX(0);
+	}
+	to {
+		transform: scaleX(1);
+	}
+}
+
+.landing-shell {
+	scroll-behavior: smooth;
+}
+
+.landing-scroll-progress {
+	transform: scaleX(0);
+}
+
+@supports (animation-timeline: scroll()) {
+	.landing-shell {
+		scroll-timeline-axis: block;
+		scroll-timeline-name: --landing-scroll;
+	}
+
+	.landing-scroll-progress {
+		animation: landing-scroll-progress linear both;
+		animation-timeline: --landing-scroll;
+	}
+}
+
+.landing-title-line {
+	display: block;
+	overflow: hidden;
+	padding-bottom: 0.08em;
+	margin-bottom: -0.08em;
+}
+
+.landing-title-line-inner {
+	display: block;
+	animation: landing-title-in 900ms cubic-bezier(0.23, 1, 0.32, 1) both;
+	will-change: transform;
+}
+
+.landing-hero-underline {
+	animation: landing-underline-in 620ms cubic-bezier(0.23, 1, 0.32, 1) 760ms
+		both;
+	transform-origin: left center;
+}
+
+.landing-hero-eyebrow {
+	animation: rise-in 520ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.landing-hero-copy {
+	animation: rise-in 620ms cubic-bezier(0.23, 1, 0.32, 1) 260ms both;
+}
+
+.landing-hero-actions {
+	animation: rise-in 620ms cubic-bezier(0.23, 1, 0.32, 1) 340ms both;
+}
+
+.landing-hero-enter {
+	animation: landing-hero-card-in 900ms cubic-bezier(0.23, 1, 0.32, 1) 120ms
+		both;
+}
+
+.landing-hero-tilt {
+	transform-style: preserve-3d;
+	will-change: transform;
+}
+
+.landing-presence-sticker {
+	animation: stamp-in 460ms cubic-bezier(0.23, 1, 0.32, 1) 820ms both;
+}
+
+.landing-observation {
+	animation: landing-observation-in 560ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.landing-teaching-move {
+	animation: landing-teaching-move-in 620ms cubic-bezier(0.23, 1, 0.32, 1) 780ms
+		both;
+}
+
+.landing-orb-presence {
+	animation: landing-orb-presence 4s ease-in-out infinite;
+	will-change: transform;
+}
+
+.landing-orb-state-copy {
+	animation: landing-orb-copy-in 260ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.landing-orb-wave {
+	display: flex;
+	height: 12px;
+	align-items: center;
+	gap: 2px;
+}
+
+.landing-orb-wave span {
+	width: 2px;
+	height: 9px;
+	border-radius: 999px;
+	background: #b8ff52;
+	opacity: 0.28;
+	transform: scaleY(0.3);
+	transform-origin: center;
+	animation: landing-orb-wave 520ms ease-in-out infinite paused;
+}
+
+.landing-orb-wave[data-talking="true"] span {
+	opacity: 1;
+	animation-play-state: running;
+}
+
+.landing-presence-dot {
+	position: relative;
+}
+
+.landing-presence-dot::after {
+	position: absolute;
+	inset: 0;
+	content: "";
+	border: 1px solid currentColor;
+	border-radius: 999px;
+	animation: landing-presence-pulse 1.8s ease-out infinite;
+}
+
+.landing-teaching-mode {
+	box-shadow: 0 0 0 1px #b8ff52;
+}
+
+.landing-motion-ready [data-landing-reveal] {
+	opacity: 0;
+	clip-path: inset(0 0 12% 0);
+	transform: translate3d(0, 28px, 0);
+	transition:
+		opacity 650ms cubic-bezier(0.23, 1, 0.32, 1),
+		transform 820ms cubic-bezier(0.23, 1, 0.32, 1),
+		clip-path 820ms cubic-bezier(0.23, 1, 0.32, 1);
+	will-change: transform, opacity, clip-path;
+}
+
+.landing-motion-ready [data-landing-reveal="left"] {
+	clip-path: inset(0 8% 0 0);
+	transform: translate3d(-28px, 0, 0);
+}
+
+.landing-motion-ready [data-landing-reveal="right"] {
+	clip-path: inset(0 0 0 8%);
+	transform: translate3d(28px, 0, 0);
+}
+
+.landing-motion-ready [data-landing-reveal="scale"] {
+	clip-path: inset(2% 2% 2% 2% round 2rem);
+	transform: scale(0.975);
+}
+
+.landing-motion-ready [data-landing-reveal][data-landing-visible="true"] {
+	opacity: 1;
+	clip-path: inset(0 0 0 0);
+	transform: translate3d(0, 0, 0) scale(1);
+}
+
+.landing-loop-signal {
+	animation: landing-loop-signal-in 580ms cubic-bezier(0.23, 1, 0.32, 1) both
+		paused;
+}
+
+.landing-model-meter {
+	animation: landing-meter-in 900ms cubic-bezier(0.23, 1, 0.32, 1) 650ms both
+		paused;
+}
+
+.landing-model-ring {
+	animation: landing-model-ring 3.2s ease-in-out infinite paused;
+}
+
+.landing-adjusted-badge {
+	animation: landing-adjusted-in 500ms cubic-bezier(0.23, 1, 0.32, 1) 1s both
+		paused;
+}
+
+.landing-loop-arrow {
+	animation: landing-arrow-pulse 1.4s ease-in-out infinite paused;
+}
+
+.landing-loop-arrow-two {
+	animation-delay: 420ms;
+}
+
+[data-landing-visible="true"] .landing-loop-signal,
+[data-landing-visible="true"] .landing-model-meter,
+[data-landing-visible="true"] .landing-model-ring,
+[data-landing-visible="true"] .landing-adjusted-badge,
+[data-landing-visible="true"] .landing-loop-arrow {
+	animation-play-state: running;
+}
+
+.landing-result-row {
+	animation: result-land 4.8s var(--ease-snap) infinite;
+	animation-play-state: paused;
+}
+
+.landing-profile-bar {
+	animation: profile-fill 0.8s var(--ease-snap) both;
+	animation-play-state: paused;
+}
+
+.landing-ghost-hint {
+	animation: ghost-hint-in 4.6s var(--ease-snap) infinite;
+	animation-play-state: paused;
+}
+
+.landing-scan-cell {
+	animation: scan-cell-read 3.8s var(--ease-snap) infinite;
+	animation-play-state: paused;
+}
+
+[data-landing-visible="true"] .landing-result-row,
+[data-landing-visible="true"] .landing-profile-bar,
+[data-landing-visible="true"] .landing-ghost-hint,
+[data-landing-visible="true"] .landing-scan-cell {
+	animation-play-state: running;
+}
+
+.landing-cta {
+	transition:
+		transform 150ms cubic-bezier(0.23, 1, 0.32, 1),
+		border-radius 220ms ease,
+		background-color 180ms ease,
+		color 180ms ease,
+		border-color 180ms ease;
+}
+
+.landing-cta:active {
+	transform: scale(0.97);
+}
+
+.landing-cta [data-icon] {
+	transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.landing-logo {
+	transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.landing-logo:active {
+	transform: scale(0.97);
+}
+
+.landing-logo svg {
+	transform-origin: bottom center;
+	transition: transform 240ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.landing-cta:hover [data-icon] {
+		transform: translateX(3px);
+	}
+
+	.landing-logo:hover svg {
+		transform: rotate(-10deg) translateY(-1px);
+	}
+
+	.landing-loop-panel {
+		transition:
+			transform 240ms cubic-bezier(0.23, 1, 0.32, 1),
+			border-color 180ms ease;
+	}
+
+	.landing-loop-panel:hover {
+		transform: translateY(-3px);
+	}
+}
+
+@keyframes orb-breathe {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.045);
+	}
+}
+
+@keyframes orb-blink {
+	0%,
+	90%,
+	100% {
+		transform: scaleY(1);
+	}
+	93%,
+	95% {
+		transform: scaleY(0.12);
+	}
+}
+
+@keyframes orb-scan {
+	0%,
+	100% {
+		transform: translateX(-14%);
+	}
+	50% {
+		transform: translateX(14%);
+	}
+}
+
+@utility animate-orb-breathe {
+	animation: orb-breathe 4s ease-in-out infinite;
+}
+
+@utility animate-orb-blink {
+	animation: orb-blink 4.4s ease-in-out infinite;
+}
+
+@utility animate-orb-scan {
+	animation: orb-scan 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.landing-shell {
+		scroll-behavior: auto;
+	}
+
+	.landing-scroll-progress {
+		display: none;
+	}
+
+	.animate-marquee,
+	.animate-rise,
+	.animate-stamp,
+	.animate-caret,
+	.animate-scanline,
+	.animate-eq-bar,
+	.animate-select-sweep,
+	.animate-chip-pop,
+	.animate-row-shimmer,
+	.animate-orb-breathe,
+	.animate-orb-blink,
+	.animate-orb-scan,
+	.landing-title-line-inner,
+	.landing-hero-underline,
+	.landing-hero-eyebrow,
+	.landing-hero-copy,
+	.landing-hero-actions,
+	.landing-hero-enter,
+	.landing-presence-sticker,
+	.landing-observation,
+	.landing-teaching-move,
+	.landing-orb-presence,
+	.landing-orb-state-copy,
+	.landing-orb-wave span,
+	.landing-loop-signal,
+	.landing-model-meter,
+	.landing-model-ring,
+	.landing-adjusted-badge,
+	.landing-loop-arrow,
+	.landing-result-row,
+	.landing-profile-bar,
+	.landing-ghost-hint,
+	.landing-scan-cell {
+		animation: none;
+		opacity: 1;
+		transform: none;
+	}
+
+	.landing-presence-dot::after {
+		display: none;
+	}
+
+	.landing-motion-ready [data-landing-reveal],
+	.landing-motion-ready [data-landing-reveal="left"],
+	.landing-motion-ready [data-landing-reveal="right"],
+	.landing-motion-ready [data-landing-reveal="scale"] {
+		opacity: 1;
+		clip-path: none;
+		transform: none;
+		transition: none;
+	}
+
+	.landing-cta,
+	.landing-cta [data-icon],
+	.landing-logo,
+	.landing-logo svg,
+	.landing-loop-panel {
+		transition: none;
+	}
+
+	.landing-cta:hover [data-icon],
+	.landing-logo:hover svg,
+	.landing-loop-panel:hover {
+		transform: none;
+	}
+}
